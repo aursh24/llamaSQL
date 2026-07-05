@@ -60,7 +60,7 @@ Do not wrap in markdown code blocks.
 
         print(f"   Corrected SQL: {corrected_sql}")
 
-        # Validate the corrected SQL
+        
         try:
             validate_sql(corrected_sql)
         except UnsafeSQLError as e:
@@ -69,7 +69,7 @@ Do not wrap in markdown code blocks.
             current_sql = corrected_sql
             continue
 
-        # Try executing the corrected SQL
+        
         try:
             columns, rows = execute_query(corrected_sql)
             print(f"   [SUCCESS] Correction successful!")

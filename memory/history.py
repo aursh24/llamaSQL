@@ -4,13 +4,6 @@ from datetime import datetime
 
 
 class ConversationHistory:
-    """
-    Manages conversation context for multi-turn interactions.
-    
-    Stores user questions and assistant responses so the LLM
-    can understand follow-up questions like "Only salary above 70000"
-    after "Show Cyber employees".
-    """
 
     def __init__(self, max_turns=10):
         self.messages = []

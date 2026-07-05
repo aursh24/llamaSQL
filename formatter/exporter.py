@@ -64,14 +64,14 @@ def export_excel(columns, rows, filename=None):
     ws = wb.active
     ws.title = "Query Results"
 
-    # Write header
+    
     ws.append(columns)
 
-    # Write data rows
+    
     for row in rows:
         ws.append(list(row))
 
-    # Auto-adjust column widths
+    
     for col_idx, col_name in enumerate(columns, 1):
         max_len = len(str(col_name))
         for row in rows:

@@ -25,7 +25,7 @@ Rules:
 
     messages = [{"role": "system", "content": system_content}]
 
-    # Inject conversation history for context continuity
+    
     if history:
         messages.extend(history)
 

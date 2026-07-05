@@ -54,14 +54,14 @@ def handle_export(columns, rows):
         path = export_excel(columns, rows)
         print(f"   [SUCCESS] Exported to: {path}")
     elif choice not in ("no", "n"):
-        pass  # Skip silently
+        pass  
 
 
 def main():
     """Main REPL loop."""
     print_banner()
 
-    # --- Startup: Discover schema ---
+    
     print("\n Discovering database schema...")
     try:
         conn = get_connection()
@@ -75,13 +75,13 @@ def main():
         print("   Check your .env file and MySQL connection.")
         return
 
-    # --- Initialize services ---
+    
     conversation = ConversationHistory(max_turns=10)
     logger = QueryLogger()
 
     print_help()
 
-    # --- REPL ---
+    
     while True:
         try:
             question = input("\n Ask your database: ").strip()
@@ -92,7 +92,7 @@ def main():
         if not question:
             continue
 
-        # --- Handle commands ---
+        
         if question.lower() == "exit":
             print("\n Goodbye!")
             break
@@ -124,7 +124,7 @@ def main():
                 print(" No query history yet.")
             continue
 
-        # --- Generate SQL ---
+        
         print("\n Generating SQL...")
         start_time = time.time()
 
@@ -140,7 +140,7 @@ def main():
 
         print(f"\n Generated SQL:\n   {sql}")
 
-        # --- Validate SQL ---
+        
         try:
             validate_sql(sql)
         except UnsafeSQLError as e:
@@ -148,7 +148,7 @@ def main():
             logger.log(question, sql, 0, 0, success=False)
             continue
 
-        # --- Execute SQL ---
+        
         print("\n Executing query...")
         columns = None
         rows = None
@@ -176,18 +176,18 @@ def main():
 
         elapsed = (time.time() - start_time) * 1000
 
-        # --- Display results ---
+        
         print(f"\n Results ({len(rows)} row{'s' if len(rows) != 1 else ''} in {elapsed:.0f}ms):\n")
         print(format_table(columns, rows))
 
-        # --- Log the query ---
+        
         logger.log(question, sql, elapsed, len(rows), success=True)
 
-        # --- Update conversation memory ---
+        
         conversation.add_user(question)
         conversation.add_assistant(sql)
 
-        # --- Export option ---
+        
         if rows:
             handle_export(columns, rows)
 
