@@ -1,0 +1,5 @@
+ollama
+mysql-connector-python
+python-dotenv
+tabulate
+openpyxl
